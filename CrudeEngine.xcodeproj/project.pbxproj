@@ -20,6 +20,13 @@
 		09242F182456977700091D9E /* VertexBufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F162456977700091D9E /* VertexBufferLayout.cpp */; };
 		093B5D732456C81A00C802BC /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 093B5D712456C81A00C802BC /* Renderer.cpp */; };
 		0949B2B724544ED400C67643 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0949B2B624544ED400C67643 /* main.cpp */; };
+		0952D5DD24581EED00EB158F /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0952D5CF24581EEB00EB158F /* imgui_impl_glfw.cpp */; };
+		0952D5DE24581EED00EB158F /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0952D5D224581EEC00EB158F /* imgui_impl_opengl3.cpp */; };
+		0952D5DF24581EED00EB158F /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0952D5D324581EEC00EB158F /* imgui_widgets.cpp */; };
+		0952D5E024581EED00EB158F /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0952D5D524581EEC00EB158F /* imgui_demo.cpp */; };
+		0952D5E124581EED00EB158F /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0952D5D924581EEC00EB158F /* imgui_draw.cpp */; };
+		0952D5E224581EED00EB158F /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0952D5DB24581EEC00EB158F /* imgui.cpp */; };
+		0952D5E4245823E700EB158F /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0952D5E3245823E700EB158F /* libGLEW.2.1.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +68,21 @@
 		093B5D722456C81A00C802BC /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 		0949B2B324544ED400C67643 /* CrudeEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CrudeEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		0949B2B624544ED400C67643 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0952D5CF24581EEB00EB158F /* imgui_impl_glfw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_glfw.cpp; sourceTree = "<group>"; };
+		0952D5D024581EEB00EB158F /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		0952D5D124581EEB00EB158F /* imstb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_textedit.h; sourceTree = "<group>"; };
+		0952D5D224581EEC00EB158F /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl3.cpp; sourceTree = "<group>"; };
+		0952D5D324581EEC00EB158F /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
+		0952D5D424581EEC00EB158F /* imstb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
+		0952D5D524581EEC00EB158F /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		0952D5D624581EEC00EB158F /* imstb_rectpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_rectpack.h; sourceTree = "<group>"; };
+		0952D5D724581EEC00EB158F /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		0952D5D824581EEC00EB158F /* imgui_impl_glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_glfw.h; sourceTree = "<group>"; };
+		0952D5D924581EEC00EB158F /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		0952D5DA24581EEC00EB158F /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3.h; sourceTree = "<group>"; };
+		0952D5DB24581EEC00EB158F /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		0952D5DC24581EED00EB158F /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		0952D5E3245823E700EB158F /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		09F3FB6E2457F67200B1FB61 /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0952D5E4245823E700EB158F /* libGLEW.2.1.0.dylib in Frameworks */,
 				09242EF22455704A00091D9E /* OpenGL.framework in Frameworks */,
 				09242EF02455704400091D9E /* libglfw.3.3.dylib in Frameworks */,
 			);
@@ -82,6 +105,7 @@
 			children = (
 				09242EF12455704A00091D9E /* OpenGL.framework */,
 				09242EEF2455704400091D9E /* libglfw.3.3.dylib */,
+				0952D5E3245823E700EB158F /* libGLEW.2.1.0.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,6 +136,7 @@
 		09242F192456991900091D9E /* vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0952D5CE24581B2600EB158F /* imgui */,
 				09242F1B2456993600091D9E /* stb */,
 				09242F1A2456992800091D9E /* GLAD */,
 			);
@@ -159,6 +184,27 @@
 				09F3FB6A245721EF00B1FB61 /* res */,
 			);
 			path = CrudeEngine;
+			sourceTree = "<group>";
+		};
+		0952D5CE24581B2600EB158F /* imgui */ = {
+			isa = PBXGroup;
+			children = (
+				0952D5D024581EEB00EB158F /* imconfig.h */,
+				0952D5D524581EEC00EB158F /* imgui_demo.cpp */,
+				0952D5D924581EEC00EB158F /* imgui_draw.cpp */,
+				0952D5CF24581EEB00EB158F /* imgui_impl_glfw.cpp */,
+				0952D5D824581EEC00EB158F /* imgui_impl_glfw.h */,
+				0952D5D224581EEC00EB158F /* imgui_impl_opengl3.cpp */,
+				0952D5DA24581EEC00EB158F /* imgui_impl_opengl3.h */,
+				0952D5DC24581EED00EB158F /* imgui_internal.h */,
+				0952D5D324581EEC00EB158F /* imgui_widgets.cpp */,
+				0952D5DB24581EEC00EB158F /* imgui.cpp */,
+				0952D5D724581EEC00EB158F /* imgui.h */,
+				0952D5D624581EEC00EB158F /* imstb_rectpack.h */,
+				0952D5D124581EEB00EB158F /* imstb_textedit.h */,
+				0952D5D424581EEC00EB158F /* imstb_truetype.h */,
+			);
+			path = imgui;
 			sourceTree = "<group>";
 		};
 		09F3FB6A245721EF00B1FB61 /* res */ = {
@@ -257,14 +303,20 @@
 				0949B2B724544ED400C67643 /* main.cpp in Sources */,
 				09242EF52455729100091D9E /* VertexBuffer.cpp in Sources */,
 				09242F0A2455822500091D9E /* Camera.cpp in Sources */,
+				0952D5DE24581EED00EB158F /* imgui_impl_opengl3.cpp in Sources */,
 				09242F072455811100091D9E /* IndexBuffer.cpp in Sources */,
 				093B5D732456C81A00C802BC /* Renderer.cpp in Sources */,
 				09242EF72455740000091D9E /* glad.c in Sources */,
+				0952D5E124581EED00EB158F /* imgui_draw.cpp in Sources */,
 				09242F122455E74A00091D9E /* Texture.cpp in Sources */,
+				0952D5E024581EED00EB158F /* imgui_demo.cpp in Sources */,
+				0952D5E224581EED00EB158F /* imgui.cpp in Sources */,
 				09242F05245580AD00091D9E /* stb_image.c in Sources */,
 				09242F182456977700091D9E /* VertexBufferLayout.cpp in Sources */,
 				09242F152456594C00091D9E /* VertexArray.cpp in Sources */,
 				09242F0024557DD500091D9E /* Shader.cpp in Sources */,
+				0952D5DD24581EED00EB158F /* imgui_impl_glfw.cpp in Sources */,
+				0952D5DF24581EED00EB158F /* imgui_widgets.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +442,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.3/lib,
+					/usr/local/Cellar/glew/2.1.0/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -403,6 +456,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw/3.3/lib,
+					/usr/local/Cellar/glew/2.1.0/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
