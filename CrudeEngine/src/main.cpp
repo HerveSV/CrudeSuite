@@ -1,0 +1,270 @@
+//
+//  main.cpp
+//  openGLWork
+//
+//  Created by Hervé Schmit-Veiler on 4/13/20.
+//  Copyright © 2020 Hervé Schmit-Veiler. All rights reserved.
+//
+
+#include <iostream>
+#include <cstdint>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <cmath>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+
+#include "rendering/Shader.hpp"
+#include "rendering/IndexBuffer.hpp"
+#include "rendering/VertexBuffer.hpp"
+#include "rendering/VertexBufferLayout.hpp"
+#include "rendering/VertexArray.hpp"
+#include "rendering/Texture.hpp"
+#include "rendering/Camera.hpp"
+#include "rendering/Renderer.hpp"
+
+
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow *window)
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+int main()
+{
+
+    const size_t bufferWidth = 760;
+    const size_t bufferHeight = 500;
+    Renderer renderer;
+    renderer.initOpenGL(3, 3, GLFW_OPENGL_CORE_PROFILE, GL_TRUE);
+    renderer.createWindow(bufferWidth, bufferHeight, "cookie&dummy");
+    
+    Shader shaderProgram("res/shader_sources/standardShader.vs", "res/shader_sources/standardShader.fs");
+    shaderProgram.setInt("uTexture1", 0);
+    shaderProgram.setInt("uTexture2", 1);
+    shaderProgram.setInt("uTexture3", 2);
+    
+    float vertices3[]
+    {
+        0.5f, 0.5f, 0.0f,       1.0f, 1.0f, //top right
+        0.5f, -0.5f, 0.0f,      1.0f, 0.0f,//bottom right
+        -0.5, -0.5f, 0.0f,      0.0f, 0.0f,//bottom left
+        -0.5f, 0.5f, 0.0f,      0.0f, 1.0f,//top left
+    };
+    
+    unsigned int indices3[]
+    {
+        1, 0, 3, //front face
+        1, 2, 3,
+    };
+    
+    float vertices[]
+    {
+        //positions             //texure
+        0.5f, 0.5f, 0.0f,       1.0f, 1.0f, //top right
+        0.5f, -0.5f, 0.0f,      1.0f, 0.0f,//bottom right
+        -0.5, -0.5f, 0.0f,      0.0f, 0.0f,//bottom left
+        -0.5f, 0.5f, 0.0f,      0.0f, 1.0f,//top left
+        
+        0.5f, 0.5f, -0.5f,      1.0f, 1.0f,//top right
+        0.5f, -0.5f, -0.5f,     1.0f, 0.0f,//bottom right
+        -0.5, -0.5f, -0.5f,     0.0f, 0.0f,//bottom left
+        -0.5f, 0.5f, -0.5f,     0.0f, 1.0f,//top left
+        
+    };
+    
+    unsigned int indices[]
+    {
+        1, 0, 3, //front face
+        1, 2, 3,
+        
+        0, 4, 7, //top face
+        0, 3, 7,
+        
+        5, 4, 7, //back face
+        5, 6, 7,
+        
+        1, 5, 6, //bottom face
+        1, 2, 6,
+        
+        5, 4, 0, //right face - positive x
+        5, 1, 0,
+        
+        3, 7, 6, //left face - negative x
+        3, 2, 6,
+        
+    };
+    
+    float vertices2[] = {
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+        
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+    };
+    
+    /*unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);/**/
+    VertexArray vao;
+    VertexBuffer vbo(vertices, sizeof(vertices));
+    VertexBufferLayout layout;
+    layout.push<float>(3);
+    layout.push<float>(2);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    //glEnableVertexAttribArray(0);
+    // texture coord attribute
+    //glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    //glEnableVertexAttribArray(1);
+    IndexBuffer ebo(indices, 36);
+    vao.addVertexBuffer(vbo, layout);
+    vao.addIndexBuffer(ebo);
+    
+    VertexArray vao3;
+    VertexBuffer vbo3(vertices3, sizeof(vertices3));
+    VertexBufferLayout layout3;
+    layout3.push<float>(3);
+    layout3.push<float>(2);
+    
+    IndexBuffer ebo3(indices3, 6);
+    vao3.addVertexBuffer(vbo3, layout3);
+    vao3.addIndexBuffer(ebo3);
+    
+    /**
+    unsigned int VBO, EBO, VAO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+    
+    
+    glBindVertexArray(VAO);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3), vertices3, GL_STATIC_DRAW);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices3), indices3, GL_STATIC_DRAW);
+    
+    //position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    //colour attribute
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3* sizeof(float)));
+    glEnableVertexAttribArray(1);/**/
+    
+    VertexArray vao2;
+    VertexBuffer vbo2(vertices2, sizeof(vertices2));
+    VertexBufferLayout layout2;
+    layout2.push<float>(3);
+    layout2.push<float>(2);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    //glEnableVertexAttribArray(0);
+    // texture coord attribute
+    //glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    //glEnableVertexAttribArray(1);
+    vao2.addVertexBuffer(vbo2, layout2);
+    
+    
+    Texture texture1("res/textures/container.jpg", GL_RGB, true);
+    Texture texture2("res/textures/awesomeface.png", GL_RGBA, true);
+    
+        
+    Camera cam(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    //glGenBuffers(1, &EBO);
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    
+    glm::mat4 model(1.0f);
+    glm::mat4 view(1.0f);
+    glm::mat4 projection(1.0f);
+    
+    model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(1.0f, 0.4f, 0.0f));
+    view = cam.GetViewMatrix();
+    projection = glm::perspective(glm::radians(45.0f), (float)bufferWidth / (float)bufferHeight, 0.1f, 100.0f);
+
+    
+    shaderProgram.bind();
+    //glUniform1i(glGetUniformLocation(shaderProgram.getID() ,"texture1"), 0);
+    
+    shaderProgram.setFloat("uVisibility3", 1.0f); //get multiple textures working
+    shaderProgram.setFloat("uVisibility2", 1.0f);
+    texture1.bind(0);
+    texture2.bind(2);
+    
+    
+
+
+    
+    renderer.setClearColour(0.2f, 0.3f, 0.3f, 1.0f);
+    renderer.enableDepthTest();
+    while(!renderer.windowShouldClose())
+    {
+        
+        renderer.clearColourBuffer();
+        renderer.clearDeptBuffer();
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //turn off wireframe mode
+        processInput(renderer.getWindow());
+        shaderProgram.bind();
+//        shaderProgram.setVec3f("uColour", sin(glfwGetTime()), sin(glfwGetTime()+glm::radians(30.0f)), sin((glfwGetTime())+glm::radians(60.0f)));
+        shaderProgram.setMat4("model", model);
+        shaderProgram.setMat4("view", view);
+        shaderProgram.setMat4("projection", projection);
+        
+        //glBindVertexArray(VAO);
+        //renderer.draw(vao3, ebo3, shaderProgram);
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        //renderer.draw(vao, ebo, shaderProgram);
+        renderer.draw(vao2, 36, shaderProgram);
+        
+        renderer.outputFrame();
+
+    }
+    
+    //glfwTerminate();
+    return 0;
+}
