@@ -13,7 +13,7 @@
 
 
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+Crude::Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -68,22 +68,22 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glDeleteShader(fragment);
 }
 
-Shader::Shader(const char* vertexFragmentPath)
+Crude::Shader::Shader(const char* vertexFragmentPath)
 {
     //implement parser to parse single file into two shader source codes
 }
 
-void Shader::bind() const
+void Crude::Shader::bind() const
 {
     glUseProgram(m_ID);
 }
 
-void Shader::unbind() const
+void Crude::Shader::unbind() const
 {
     glUseProgram(0);
 }
 
-int Shader::getUniformLocation(const std::string &name)
+int Crude::Shader::getUniformLocation(const std::string &name)
 {
     if(m_uniformLocationCache.find(name) != m_uniformLocationCache.end())
     {
@@ -99,42 +99,42 @@ int Shader::getUniformLocation(const std::string &name)
     return location;
 }
 
-void Shader::setBool(const std::string &name, bool value)
+void Crude::Shader::setBool(const std::string &name, bool value)
 {
     glUniform1i(getUniformLocation(name), (int)value);
 }
 
-void Shader::setInt(const std::string &name, int value)
+void Crude::Shader::setInt(const std::string &name, int value)
 {
     glUniform1i(getUniformLocation(name), value);
 }
 
-void Shader::setFloat(const std::string &name, float value)
+void Crude::Shader::setFloat(const std::string &name, float value)
 {
     glUniform1f(getUniformLocation(name), value);
 }
 
-void Shader::setVec2f(const std::string &name, float x, float y)
+void Crude::Shader::setVec2f(const std::string &name, float x, float y)
 {
     glUniform2f(getUniformLocation(name), x, y);
 }
 
-void Shader::setVec3f(const std::string &name, float x, float y, float z)
+void Crude::Shader::setVec3f(const std::string &name, float x, float y, float z)
 {
     glUniform3f(getUniformLocation(name), x, y, z);
 }
 
-void Shader::setVec4f(const std::string &name, float x, float y, float z, float w)
+void Crude::Shader::setVec4f(const std::string &name, float x, float y, float z, float w)
 {
     glUniform4f(getUniformLocation(name), x, y, z, w);
 }
 
-void Shader::setMat4(const std::string &name, const glm::mat4 &mat)
+void Crude::Shader::setMat4(const std::string &name, const glm::mat4 &mat)
 {
     glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
-void Shader::checkCompileErrors(unsigned int shader, std::string type)
+void Crude::Shader::checkCompileErrors(unsigned int shader, std::string type)
 {
     int success;
     char infoLog[1024];

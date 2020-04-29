@@ -10,17 +10,34 @@
 
 #include <GLFW/glfw3.h>
 
-Renderer::Renderer()
+
+bool Crude::windowShouldClose(Window *window)
+{
+    return glfwWindowShouldClose(window);
+}
+
+void Crude::closeWindow(Window *window)
+{
+    return glfwSetWindowShouldClose(window, true);
+}
+
+unsigned int Crude::getKey(Window *window, unsigned int key)
+{
+    return glfwGetKey(window, key);
+}
+
+
+Crude::Renderer::Renderer()
 {
     
 }
 
-Renderer::~Renderer()
+Crude::Renderer::~Renderer()
 {
     glfwTerminate();
 }
 
-void Renderer::initOpenGL(unsigned int CONTEXT_VERSION_MAJOR = 3,
+void Crude::Renderer::initOpenGL(unsigned int CONTEXT_VERSION_MAJOR = 3,
                           unsigned int CONTEXT_VERSION_MINOR = 3,
                           unsigned int OPENGL_PROFILE = GLFW_OPENGL_CORE_PROFILE,
                           unsigned int FORWARD_COMPAT = GL_TRUE)
@@ -32,28 +49,27 @@ void Renderer::initOpenGL(unsigned int CONTEXT_VERSION_MAJOR = 3,
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, FORWARD_COMPAT);
 }
 
-/*bool Renderer::createWindow(unsigned int width, unsigned int height,
+Crude::Window* Crude::Renderer::createWindow(int width, int height,
                             std::string name)
 {
+    assert((width >= 0 || height >= 0) && "You can't have negative window width or length!");
+    
     m_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
+    m_windowWidth = width;
+    m_windowHeight = height;
     
     if(m_window == NULL)
     {
-        std::cout<<"Failed to create GLFW window"<<std::endl;
+        std::cout << "Failed to create GLFW window with name: " << name << std::endl;
         glfwTerminate();
-        return false;
+        return nullptr;
     }
-    
     glfwMakeContextCurrent(m_window);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout<<"Failed to initialize GLAD"<<std::endl;
-        return false;
-    }
-    return true;
+    return m_window;
+    
 }
 
-bool Renderer::checkWindow()
+bool Crude::Renderer::checkWindow()
 {
     if(m_window == NULL)
     {
@@ -61,19 +77,29 @@ bool Renderer::checkWindow()
         return false;
     }
     return true;
-}*/
+}
 
-void Renderer::enableDepthTest() const
+void Crude::Renderer::enableDepthTest() const
 {
     glEnable(GL_DEPTH_TEST);
 }
 
-void Renderer::clearDeptBuffer() const
+void Crude::Renderer::clearDeptBuffer() const
 {
     glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader) const
+void Crude::Renderer::pollEvents() const
+{
+    glfwPollEvents();
+}
+
+void Crude::Renderer::swapBuffers() const
+{
+    glfwSwapBuffers(m_window);
+}
+
+void Crude::Renderer::draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader) const
 {
     shader.bind();
     vao.bind();
@@ -81,20 +107,136 @@ void Renderer::draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader) const
     glDrawElements(GL_TRIANGLES, ebo.getCount(), GL_UNSIGNED_INT, 0);
 }
 
-void Renderer::draw(VertexArray &vao, unsigned int verticesCount, Shader &shader) const
+void Crude::Renderer::draw(VertexArray &vao, unsigned int verticesCount, Shader &shader) const
 {
     shader.bind();
     vao.bind();
     glDrawArrays(GL_TRIANGLES, 0, verticesCount);
 }
 
-void Renderer::setClearColour(float r, float g, float b, float a)
+void Crude::Renderer::draw(const unsigned int &vao, unsigned int verticesCount, Shader &shader) const
+{
+    shader.bind();
+    glBindVertexArray(vao);
+    glDrawArrays(GL_TRIANGLES, 0, verticesCount);
+}
+
+void Crude::Renderer::setClearColour(float r, float g, float b, float a)
 {
     m_windowClearColour = glm::vec4(r, g, b, a);
     glClearColor(r, g, b, a);
 }
 
-void Renderer::clearColourBuffer() const
+void Crude::Renderer::clearColourBuffer() const
 {
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Crude::Renderer::enableVsync(bool enable)
+{
+    glfwSwapInterval(enable);
+}
+
+void Crude::Renderer::enablePolygonMode(bool enable)
+{
+    if(enable)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
+    else
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+}
+
+void Crude::Renderer::setWindow(Crude::Window* window)
+{
+    if(window == nullptr)
+    {
+        std::cout << "Warning: This window does not exist!" <<std::endl;
+    }
+    if(m_window != nullptr)
+    {
+        std::cout << "Window currently in existance will be overrided!" <<std::endl;
+    }
+    glfwMakeContextCurrent(window);
+    m_window = window;
+}
+
+bool Crude::Renderer::windowShouldClose() const
+{
+    return glfwWindowShouldClose(m_window);
+}
+
+Crude::Window* Crude::Renderer::getWindow()
+{
+    return m_window;
+}
+
+bool Crude::Renderer::initGlLoader()
+{
+    bool err;
+    // Initialize OpenGL loader
+#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
+    err = gl3wInit() != 0;
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
+    err = glewInit() != GLEW_OK;
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
+    err = gladLoadGL() == 0;
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING2)
+    err = false;
+    glbinding::Binding::initialize();
+#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING3)
+    err = false;
+    glbinding::initialize([](const char* name) { return (glbinding::ProcAddress)glfwGetProcAddress(name); });
+#else
+    err = false; // If you use IMGUI_IMPL_OPENGL_LOADER_CUSTOM, your loader is likely to requires some form of initialization.
+#endif
+    
+    assert(!err && "Fatal Error: Failed to initialise OpenGL loader!");
+
+    return err;
+}
+
+
+
+void ImGui::CrudeInit(GLFWwindow *window, bool darkMode)
+{
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    if(darkMode)
+    {
+        ImGui::StyleColorsDark();
+    }
+    else
+    {
+        ImGui::StyleColorsClassic();
+    }
+    
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    std::string glsl_version;
+#if __APPLE__
+    // GL 3.2 + GLSL 150
+    glsl_version = "#version 150";
+#else
+    // GL 3.0 + GLSL 130
+    glsl_version = "#version 130";
+#endif
+
+    ImGui_ImplOpenGL3_Init(glsl_version.c_str());
+}
+
+void ImGui::CrudeNewFrame()
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
+void ImGui::CrudeRenderFrame()
+{
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}

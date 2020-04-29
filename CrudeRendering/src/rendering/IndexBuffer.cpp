@@ -10,25 +10,25 @@
 #include <GL/glew.h> 
 #include <GLFW/glfw3.h>
 
-IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count) //count is element count of data
+Crude::IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count) //count is element count of data
 {
     glGenBuffers(1, &m_ID);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
+    bind();
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), data, GL_STATIC_DRAW);
-    m_count = count;
+    
 }
 
-IndexBuffer::~IndexBuffer()
+Crude::IndexBuffer::~IndexBuffer()
 {
     glDeleteBuffers(1, &m_ID);
 }
 
-void IndexBuffer::bind() const
+void Crude::IndexBuffer::bind() const
 {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
+    glBindBuffer(1, m_ID);
 }
 
-void IndexBuffer::unbind() const
+void Crude::IndexBuffer::unbind() const
 {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(1, 0);
 }

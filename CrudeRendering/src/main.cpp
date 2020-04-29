@@ -1,4 +1,4 @@
-// dear imgui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
+/*// dear imgui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
 // If you are new to dear imgui, see examples/README.txt and documentation at the top of imgui.cpp.
 // (GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 
@@ -29,95 +29,44 @@ using namespace gl;
 using namespace gl;
 #else
 #include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
-#endif
+#endif*/
 
 // Include glfw3.h after our OpenGL definitions
-#include <GLFW/glfw3.h>
+#include "Crude_Suite.h"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include "rendering/Shader.hpp"
-#include "rendering/IndexBuffer.hpp"
-#include "rendering/VertexBuffer.hpp"
-#include "rendering/VertexBufferLayout.hpp"
-#include "rendering/VertexArray.hpp"
-#include "rendering/Texture.hpp"
-#include "rendering/Camera.hpp"
-#include "rendering/Renderer.hpp"
-// To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
-// Your own project should not be affected, as you are likely to link with a newer binary of GLFW that is adequate for your version of Visual Studio.
-#if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
-#pragma comment(lib, "legacy_stdio_definitions")
-#endif
+using namespace Crude;
 
 static void glfw_error_callback(int error, const char* description)
 {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 
-void processInput(GLFWwindow *window)
+void processInput(Crude::Window *window)
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    if(Crude::getKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        Crude::closeWindow(window);
 }
+
 int main()
 {
-    const char* glsl_version = "#version 150";
-    const size_t windowWidth = 760;
-    const size_t windowHeight = 500;
-    Renderer renderer;
+    //std::string glsl_version = "#version 330";
+    const size_t windowWidth = 1280;
+    const size_t windowHeight = 800;
+    Crude::Renderer renderer;
     renderer.initOpenGL(3, 3, GLFW_OPENGL_CORE_PROFILE, GL_TRUE);
-    GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "cookie&dummy", NULL, NULL);
+    Crude::Window* window = renderer.createWindow(windowWidth, windowHeight);
     if (window == NULL)
         return 1;
-    glfwMakeContextCurrent(window);
-    glfwSwapInterval(1); // Enable vsync
+    renderer.enableVsync(true); // Enable vsync
     
-    // Initialize OpenGL loader
-#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
-    bool err = gl3wInit() != 0;
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
-    bool err = glewInit() != GLEW_OK;
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
-    bool err = gladLoadGL() == 0;
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING2)
-    bool err = false;
-    glbinding::Binding::initialize();
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING3)
-    bool err = false;
-    glbinding::initialize([](const char* name) { return (glbinding::ProcAddress)glfwGetProcAddress(name); });
-#else
-    bool err = false; // If you use IMGUI_IMPL_OPENGL_LOADER_CUSTOM, your loader is likely to requires some form of initialization.
-#endif
-    if (err)
-    {
-        fprintf(stderr, "Failed to initialize OpenGL loader!\n");
-        return 1;
-    }
-    // Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    renderer.initGlLoader();
     
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsClassic();
+    ImGui::CrudeInit(window, true);
     
-    // Setup Platform/Renderer bindings
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
-    
-    Shader shaderProgram("res/shader_sources/standardShader.vs", "res/shader_sources/standardShader.fs");
+    Crude::Shader shaderProgram("res/shader_sources/standardShader.vs", "res/shader_sources/standardShader.fs");
     shaderProgram.setInt("uTexture1", 0);
     shaderProgram.setInt("uTexture2", 1);
     shaderProgram.setInt("uTexture3", 2);
@@ -218,133 +167,88 @@ int main()
     };
     
     
-    unsigned int VAO, VBO;
-    glGenBuffers(1, &VBO);
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     
-    
-    VertexArray vao;
-    VertexBuffer vbo(vertices, sizeof(vertices));
-    VertexBufferLayout layout;
-    layout.push<float>(3);
-    layout.push<float>(2);
-    IndexBuffer ebo(indices, 36);
-    vao.addVertexBuffer(vbo, layout);
-    vao.addIndexBuffer(ebo);
-    
-    VertexArray vao3;
-    VertexBuffer vbo3(vertices3, sizeof(vertices3));
-    VertexBufferLayout layout3;
-    layout3.push<float>(3);
-    layout3.push<float>(2);
-    
-    IndexBuffer ebo3(indices3, 6);
-    vao3.addVertexBuffer(vbo3, layout3);
-    vao3.addIndexBuffer(ebo3);
-    
-    
-    
-    VertexArray vao2;
-    VertexBuffer vbo2(vertices2, sizeof(vertices2));
-    VertexBufferLayout layout2;
+    Crude::VertexArray vao2;
+    Crude::VertexBuffer vbo2(vertices2, sizeof(vertices2));
+    Crude::VertexBufferLayout layout2;
+
     layout2.push<float>(3);
     layout2.push<float>(2);
     vao2.addVertexBuffer(vbo2, layout2);
     
+    Crude::VertexArray vao;
+    Crude::VertexBuffer vbo(vertices, sizeof(vertices));
+    Crude::VertexBufferLayout layout;
+    layout.push<float>(3);
+    layout.push<float>(2);
+    Crude::IndexBuffer ebo(indices, 36);
+    vao.addVertexBuffer(vbo, layout);
+    vao.addIndexBuffer(ebo);
     
-    Texture texture1("res/textures/container.jpg", GL_RGB, true);
-    Texture texture2("res/textures/awesomeface.png", GL_RGBA, true);
+    Crude::VertexArray vao3;
+    Crude::VertexBuffer vbo3(vertices3, sizeof(vertices3));
+    Crude::VertexBufferLayout layout3;
+    layout3.push<float>(3);
+    layout3.push<float>(2);
+    
+    Crude::IndexBuffer ebo3(indices3, 6);
+    vao3.addVertexBuffer(vbo3, layout3);
+    vao3.addIndexBuffer(ebo3);
+    
+    Crude::Texture texture1("res/textures/container.jpg", GL_RGB, true);
+    Crude::Texture texture2("res/textures/awesomeface.png", GL_RGBA, true);
     
     
-    Camera cam(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-    //glGenBuffers(1, &EBO);
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    
-    glm::mat4 model(1.0f);
+    Crude::Camera cam(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
     glm::mat4 view(1.0f);
     glm::mat4 projection(1.0f);
     
-    model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(1.0f, 0.4f, 0.0f));
-    view = cam.GetViewMatrix();
+    view = cam.getViewMatrix();
     projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
-    
-    //model = glm::mat4(1.0f);
-    //view = glm::mat4(1.0f);
-    //projection = glm::mat4(1.0f);
-    
+
     shaderProgram.bind();
-    //glUniform1i(glGetUniformLocation(shaderProgram.getID() ,"texture1"), 0);
-    
+
     shaderProgram.setFloat("uVisibility3", 1.0f); //get multiple textures working
     shaderProgram.setFloat("uVisibility2", 1.0f);
     texture1.bind(0);
     texture2.bind(1);
-    
-    /*
-     ImGUI setup
-     */
-    
-    /*
-     */
-    
-    
-    
-    glm::vec4 clearColour = glm::vec4(0.45f, 0.55f, 0.60f, 1.00f);
+    float Xrotation = 45.0f;
+    float Yrotation = 45.0f;
+    float Zrotation = 45.0f;
+    glm::vec4 clearColour = glm::vec4(0.2f, 0.3f, 0.3f, 1.0f);
     renderer.enableDepthTest();
-    while(!glfwWindowShouldClose(window))
+    while(!renderer.windowShouldClose())
     {
+        glm::mat4 model(1.0f);
+        model = glm::rotate(model, glm::radians(Xrotation), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(Yrotation), glm::vec3(0.0f, 1.0f, 0.0f));
+         model = glm::rotate(model, glm::radians(Zrotation), glm::vec3(0.0f, 0.0f, 1.0f));
         renderer.setClearColour(clearColour.r, clearColour.g, clearColour.b, clearColour.a);
         processInput(window);
         renderer.clearColourBuffer();
         renderer.clearDeptBuffer();
-        
-        
-        //  ImGui_ImplGlfw_NewFrame();
-        //  ImGui::NewFrame();
-        
-        
-        
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //turn off wireframe mode
-        
+
+        renderer.enablePolygonMode(false);
         shaderProgram.bind();
-        //        shaderProgram.setVec3f("uColour", sin(glfwGetTime()), sin(glfwGetTime()+glm::radians(30.0f)), sin((glfwGetTime())+glm::radians(60.0f)));
-        shaderProgram.setMat4("model", model);
-        shaderProgram.setMat4("view", view);
-        shaderProgram.setMat4("projection", projection);
+
+        shaderProgram.setMat4("uMVP", projection*view*model);
+
+        renderer.draw(vao2, 36, shaderProgram);
+        ImGui::CrudeNewFrame();
         
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        //glBindVertexArray(VAO);
-        //renderer.draw(vao3, ebo3, shaderProgram);
-        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        //renderer.draw(vao, ebo, shaderProgram);
-        //glBindVertexArray(vao2.getID());
-        //glDrawArrays(GL_TRIANGLES, 0, 36);
-        //renderer.draw(vao2, 36, shaderProgram);
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
         ImGui::ShowDemoWindow();
         ImGui::Begin("Hey");
         ImGui::ColorEdit3("clear color", (float*)&clearColour);
+        ImGui::SliderFloat("X Rotation", &Xrotation, 0, 360);
+        ImGui::SliderFloat("Y Rotation", &Yrotation, 0, 360);
+        ImGui::SliderFloat("Z Rotation", &Zrotation, 0, 360);
         ImGui::End();
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        //ImGui::ShowDemoWindow(&show_demo_window);
-        // Rendering
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        ImGui::CrudeRenderFrame();
         
+        renderer.swapBuffers();
+        renderer.pollEvents();
     }
     
     glfwTerminate();

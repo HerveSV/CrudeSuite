@@ -4,36 +4,32 @@ layout (location = 1) in vec2 aTexCoord; //Texture coordinates
 //layout (location = 2) in vec3 aColour; // the color variable has attribute position 1
 
 
-out vec3 ourColour; // output a color to the fragment shader;
-out vec2 TexCoord;
+out vec3 vColour; // output a color to the fragment shader;
+out vec2 vTexCoord;
 
 uniform vec3 uColour;
-//uniform float uaColourMix = 0.0f;
-//uniform bool invert = false;
-//uniform float xOffset = 0.0f;
-//uniform float yOffset = 0.0f;
+uniform bool uReflectX = false; //reflecting shape in the x-axis
+uniform bool uReflectY = false; //reflecting shape in the y-axis
 
-uniform mat4 model = mat4(1.0f);
-uniform mat4 view = mat4(1.0f);
-uniform mat4 projection = mat4(1.0f);
-
-//uniform mat4 transform;
+uniform mat4 uMVP = mat4(1.0f);
 
 void main() {
     
-    /*vec3 tempPos = aPos;
-    if(invert)
+    vec3 tempPos = aPos;
+    
+    if(uReflectX)
     {
-        tempPos.y = -tempPos.y;
+        tempPos.y = -aPos.y;
     }
-    tempPos.x += xOffset;
-    tempPos.y += yOffset;
-    gl_Position = projection * view * model * vec4(tempPos, 1.0f);
-    ourColor = aColor; // set ourColor to the input color we got from the vertex data
-    TexCoord = aTexCoord;*/
-    gl_Position = projection * view * model * vec4(aPos, 1.0f);
-    TexCoord = aTexCoord;
-    ourColour = uColour;
+    
+    if(uReflectY)
+    {
+        tempPos.x = -aPos.x;
+    }
+    
+    gl_Position = uMVP * vec4(tempPos, 1.0f);
+    vTexCoord = aTexCoord;
+    vColour = uColour;
 
     
 }

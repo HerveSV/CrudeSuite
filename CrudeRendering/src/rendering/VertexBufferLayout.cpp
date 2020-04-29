@@ -11,7 +11,7 @@
 #include <GL/glew.h> 
 #include <GLFW/glfw3.h>
 
-unsigned int VertexBufferElement::getSizeOfType(unsigned int type)
+unsigned int Crude::VertexBufferElement::getSizeOfType(unsigned int type)
 {
     switch(type)
     {
@@ -19,22 +19,41 @@ unsigned int VertexBufferElement::getSizeOfType(unsigned int type)
         case GL_UNSIGNED_INT:   return 4;
         case GL_UNSIGNED_BYTE:  return 1;
     }
+    std::cout<< "Type " << type << "is/may not supported by Crude" <<std::endl;
     return 0;
 }
 
-template<> inline void VertexBufferLayout::push<float>(unsigned int count)
+void Crude::VertexBufferLayout::pushf(unsigned int count)
 {
     m_elements.push_back(VertexBufferElement(GL_FLOAT, count, GL_FALSE));
     m_stride += VertexBufferElement::getSizeOfType(GL_FLOAT) * count;
 }
 
-template<> inline void VertexBufferLayout::push<unsigned int>(unsigned int count)
+void Crude::VertexBufferLayout::pushui(unsigned int count)
 {
     m_elements.push_back(VertexBufferElement(GL_UNSIGNED_INT, count, GL_FALSE));
     m_stride += VertexBufferElement::getSizeOfType(GL_UNSIGNED_INT) * count;
 }
 
-template<> inline void VertexBufferLayout::push<unsigned char>(unsigned int count)
+void Crude::VertexBufferLayout::pushuc(unsigned int count)
+{
+    m_elements.push_back(VertexBufferElement(GL_UNSIGNED_BYTE, count, GL_FALSE));
+    m_stride += VertexBufferElement::getSizeOfType(GL_UNSIGNED_BYTE) * count;
+}
+
+template<> void Crude::VertexBufferLayout::push<float>(unsigned int count)
+{
+    m_elements.push_back(VertexBufferElement(GL_FLOAT, count, GL_FALSE));
+    m_stride += VertexBufferElement::getSizeOfType(GL_FLOAT) * count;
+}
+
+template<> void Crude::VertexBufferLayout::push<unsigned int>(unsigned int count)
+{
+    m_elements.push_back(VertexBufferElement(GL_UNSIGNED_INT, count, GL_FALSE));
+    m_stride += VertexBufferElement::getSizeOfType(GL_UNSIGNED_INT) * count;
+}
+
+template<> void Crude::VertexBufferLayout::push<unsigned char>(unsigned int count)
 {
     m_elements.push_back(VertexBufferElement(GL_UNSIGNED_BYTE, count, GL_FALSE));
     m_stride += VertexBufferElement::getSizeOfType(GL_UNSIGNED_BYTE) * count;

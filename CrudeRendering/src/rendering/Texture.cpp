@@ -11,7 +11,7 @@
 #include <GL/glew.h> 
 #include <GLFW/glfw3.h>
 
-Texture::Texture(std::string filepath, unsigned int colourFormat, bool verticalFlip) //colourFormat is the external format
+Crude::Texture::Texture(std::string filepath, unsigned int colourFormat, bool verticalFlip) //colourFormat is the external format
 : m_ID(0), m_filepath(filepath), m_localBuffer(nullptr), m_width(0), m_height(0), m_BPP(0), m_slot(0)
 {
     glGenTextures(1, &m_ID);
@@ -41,12 +41,12 @@ Texture::Texture(std::string filepath, unsigned int colourFormat, bool verticalF
    
 }
 
-Texture::~Texture()
+Crude::Texture::~Texture()
 {
     glDeleteTextures(1, &m_ID);
 }
 
-void Texture::bind(unsigned int slot)
+void Crude::Texture::bind(unsigned int slot)
 {
     assert(slot <= GL_MAX_TEXTURE_UNITS && "slot exceed maximum texture units available!");
     m_slot = slot;
@@ -54,7 +54,7 @@ void Texture::bind(unsigned int slot)
     glBindTexture(GL_TEXTURE_2D, m_ID);
 }
 
-void Texture::unbind()
+void Crude::Texture::unbind()
 {
     glActiveTexture(GL_TEXTURE0 + m_slot);
     glBindTexture(GL_TEXTURE_2D, 0);

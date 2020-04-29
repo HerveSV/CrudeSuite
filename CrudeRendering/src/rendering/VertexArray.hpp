@@ -15,21 +15,31 @@
 #include "IndexBuffer.hpp"
 #include "VertexBufferLayout.hpp"
 
-class VertexArray
+namespace Crude
 {
-private:
-    unsigned int m_ID;
-public:
-    VertexArray();
-    ~VertexArray();
-    
-    void bind() const;
-    void unbind() const;
-    
-    void addVertexBuffer(VertexBuffer &vbo, VertexBufferLayout &layout);
-    void addIndexBuffer(IndexBuffer &ebo);
-    
-    inline unsigned int getID() const {return m_ID;}
-    
-};
+    class VertexArray
+    {
+    private:
+        
+        unsigned int m_ID;
+        
+    public:
+        
+        VertexArray();
+        
+        ~VertexArray();
+        
+        void bind() const;
+        
+        void unbind() const;
+        
+        void addVertexBuffer(VertexBuffer &vbo, VertexBufferLayout &layout);
+        
+        void addIndexBuffer(IndexBuffer &ebo);
+        
+        inline unsigned int getID() const {return m_ID;}
+        
+    };
+}
+
 #endif /* VertexArray_hpp */

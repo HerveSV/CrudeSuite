@@ -11,27 +11,27 @@
 #include <GL/glew.h> 
 #include <GLFW/glfw3.h>
 
-VertexArray::VertexArray()
+Crude::VertexArray::VertexArray()
 {
     glGenVertexArrays(1, &m_ID);
 }
 
-VertexArray::~VertexArray()
+Crude::VertexArray::~VertexArray()
 {
     glDeleteVertexArrays(1, &m_ID);
 }
 
-void VertexArray::bind() const
+void Crude::VertexArray::bind() const
 {
     glBindVertexArray(m_ID);
 }
 
-void VertexArray::unbind() const
+void Crude::VertexArray::unbind() const
 {
     glBindVertexArray(0);
 }
 
-void VertexArray::addVertexBuffer(VertexBuffer &vbo, VertexBufferLayout &layout)
+void Crude::VertexArray::addVertexBuffer(VertexBuffer &vbo, VertexBufferLayout &layout)
 {
     bind();
     vbo.bind();
@@ -47,7 +47,7 @@ void VertexArray::addVertexBuffer(VertexBuffer &vbo, VertexBufferLayout &layout)
     
 }
 
-void VertexArray::addIndexBuffer(IndexBuffer &ebo)
+void Crude::VertexArray::addIndexBuffer(IndexBuffer &ebo)
 {
     bind();
     ebo.bind();

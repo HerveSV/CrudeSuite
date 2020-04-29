@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/Herve/Desktop/OpenGL/CrudeEngine/CrudeEngine/CrudeRendering"
+      customWorkingDirectory = "/Users/Herve/Desktop/OpenGL/CrudeRendering/CrudeRendering"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"

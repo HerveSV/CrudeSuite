@@ -11,20 +11,28 @@
 
 #include <stdio.h>
 
-
-class VertexBuffer
+namespace Crude
 {
-private:
-    unsigned int m_ID;
-public:
-    VertexBuffer(const void* data, unsigned int size); //size is bytecount of data
-    ~VertexBuffer();
     
-    void bind() const;
-    void unbind() const;
-    
-    inline unsigned int getID() const {return m_ID;}
-};
+    class VertexBuffer
+    {
+    private:
+        
+        unsigned int m_ID;
+        
+    public:
+        
+        VertexBuffer(const void* data, unsigned int size); //size is bytecount of data
+        
+        ~VertexBuffer();
+        
+        void bind() const;
+        
+        void unbind() const;
+        
+        inline unsigned int getID() const {return m_ID;}
+    };
 
+}
 
 #endif /* VertexBuffer_hpp */
