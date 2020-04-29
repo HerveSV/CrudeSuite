@@ -216,7 +216,7 @@
 		09F3FB6A245721EF00B1FB61 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				09F3FB6C24572BD100B1FB61 /* shader_sources */,
+				09F3FB6C24572BD100B1FB61 /* shaderSources */,
 				09F3FB6B245721FF00B1FB61 /* textures */,
 			);
 			path = res;
@@ -231,13 +231,13 @@
 			path = textures;
 			sourceTree = "<group>";
 		};
-		09F3FB6C24572BD100B1FB61 /* shader_sources */ = {
+		09F3FB6C24572BD100B1FB61 /* shaderSources */ = {
 			isa = PBXGroup;
 			children = (
 				09242F0B245587A000091D9E /* standardShader.vs */,
 				09242F0C245587B100091D9E /* standardShader.fs */,
 			);
-			path = shader_sources;
+			path = shaderSources;
 			sourceTree = "<group>";
 		};
 		09F3FB6D2457CD8300B1FB61 /* src */ = {

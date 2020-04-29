@@ -66,7 +66,7 @@ int main()
     
     ImGui::CrudeInit(window, true);
     
-    Crude::Shader shaderProgram("res/shader_sources/standardShader.vs", "res/shader_sources/standardShader.fs");
+    Crude::Shader shaderProgram("res/shaderSources/standardShader.vs", "res/shaderSources/standardShader.fs");
     shaderProgram.setInt("uTexture1", 0);
     shaderProgram.setInt("uTexture2", 1);
     shaderProgram.setInt("uTexture3", 2);
