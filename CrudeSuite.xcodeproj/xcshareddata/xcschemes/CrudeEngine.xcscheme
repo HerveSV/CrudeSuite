@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0949B2B224544ED400C67643"
-               BuildableName = "CrudeRendering"
-               BlueprintName = "CrudeRendering"
-               ReferencedContainer = "container:CrudeRendering.xcodeproj">
+               BuildableName = "CrudeSuite"
+               BlueprintName = "CrudeSuite"
+               ReferencedContainer = "container:CrudeSuite.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0949B2B224544ED400C67643"
-            BuildableName = "CrudeRendering"
-            BlueprintName = "CrudeRendering"
-            ReferencedContainer = "container:CrudeRendering.xcodeproj">
+            BuildableName = "CrudeSuite"
+            BlueprintName = "CrudeSuite"
+            ReferencedContainer = "container:CrudeSuite.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/Herve/Desktop/OpenGL/CrudeRendering/CrudeRendering"
+      customWorkingDirectory = "/Users/Herve/Desktop/OpenGL/CrudeSuite/CrudeSuite"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0949B2B224544ED400C67643"
-            BuildableName = "CrudeRendering"
-            BlueprintName = "CrudeRendering"
-            ReferencedContainer = "container:CrudeRendering.xcodeproj">
+            BuildableName = "CrudeSuite"
+            BlueprintName = "CrudeSuite"
+            ReferencedContainer = "container:CrudeSuite.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0949B2B224544ED400C67643"
-            BuildableName = "CrudeRendering"
-            BlueprintName = "CrudeRendering"
-            ReferencedContainer = "container:CrudeRendering.xcodeproj">
+            BuildableName = "CrudeSuite"
+            BlueprintName = "CrudeSuite"
+            ReferencedContainer = "container:CrudeSuite.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

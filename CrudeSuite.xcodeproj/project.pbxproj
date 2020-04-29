@@ -67,13 +67,13 @@
 		09242F172456977700091D9E /* VertexBufferLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexBufferLayout.hpp; sourceTree = "<group>"; };
 		093B5D712456C81A00C802BC /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		093B5D722456C81A00C802BC /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
-		0949B2B324544ED400C67643 /* CrudeRendering */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CrudeRendering; sourceTree = BUILT_PRODUCTS_DIR; };
+		0949B2B324544ED400C67643 /* CrudeSuite */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CrudeSuite; sourceTree = BUILT_PRODUCTS_DIR; };
 		0949B2B624544ED400C67643 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		09B23CC62458819200773A9C /* preImGui.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = preImGui.txt; sourceTree = "<group>"; };
 		09B23D2124592E2100773A9C /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		09B23D462459491200773A9C /* workingCoop.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = workingCoop.txt; sourceTree = "<group>"; };
-		09B23D492459C3F500773A9C /* Crude_Rendering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Crude_Rendering.h; sourceTree = "<group>"; };
-		09B23D4A2459C54200773A9C /* Crude_Suite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Crude_Suite.h; sourceTree = "<group>"; };
+		09B23D492459C3F500773A9C /* CrudeRendering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrudeRendering.h; sourceTree = "<group>"; };
+		09B23D4A2459C54200773A9C /* CrudeSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrudeSuite.h; sourceTree = "<group>"; };
 		09B23D4B2459CA5000773A9C /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_opengl3.h; path = "../../../../../../../Downloads/imgui-1.76 2/examples/imgui_impl_opengl3.h"; sourceTree = "<group>"; };
 		09B23D4C2459CA5000773A9C /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_impl_opengl3.cpp; path = "../../../../../../../Downloads/imgui-1.76 2/examples/imgui_impl_opengl3.cpp"; sourceTree = "<group>"; };
 		09B23D4E2459CA6700773A9C /* imgui_impl_glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_glfw.h; path = "../../../../../../../Downloads/imgui-1.76 2/examples/imgui_impl_glfw.h"; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		09242F0E2455E72000091D9E /* rendering */ = {
 			isa = PBXGroup;
 			children = (
-				09B23D492459C3F500773A9C /* Crude_Rendering.h */,
+				09B23D492459C3F500773A9C /* CrudeRendering.h */,
 				09242EFE24557DD500091D9E /* Shader.cpp */,
 				09242EFF24557DD500091D9E /* Shader.hpp */,
 				09242F062455811100091D9E /* IndexBuffer.cpp */,
@@ -169,7 +169,7 @@
 		0949B2AA24544ED400C67643 = {
 			isa = PBXGroup;
 			children = (
-				0949B2B524544ED400C67643 /* CrudeRendering */,
+				0949B2B524544ED400C67643 /* CrudeSuite */,
 				0949B2B424544ED400C67643 /* Products */,
 				09242EEE2455704400091D9E /* Frameworks */,
 			);
@@ -178,18 +178,18 @@
 		0949B2B424544ED400C67643 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0949B2B324544ED400C67643 /* CrudeRendering */,
+				0949B2B324544ED400C67643 /* CrudeSuite */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0949B2B524544ED400C67643 /* CrudeRendering */ = {
+		0949B2B524544ED400C67643 /* CrudeSuite */ = {
 			isa = PBXGroup;
 			children = (
 				09F3FB6D2457CD8300B1FB61 /* src */,
 				09F3FB6A245721EF00B1FB61 /* res */,
 			);
-			path = CrudeRendering;
+			path = CrudeSuite;
 			sourceTree = "<group>";
 		};
 		0952D5CE24581B2600EB158F /* imgui */ = {
@@ -245,7 +245,7 @@
 			children = (
 				09242F192456991900091D9E /* vendor */,
 				09242F0E2455E72000091D9E /* rendering */,
-				09B23D4A2459C54200773A9C /* Crude_Suite.h */,
+				09B23D4A2459C54200773A9C /* CrudeSuite.h */,
 				0949B2B624544ED400C67643 /* main.cpp */,
 				09B23CC62458819200773A9C /* preImGui.txt */,
 				09B23D462459491200773A9C /* workingCoop.txt */,
@@ -256,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0949B2B224544ED400C67643 /* CrudeRendering */ = {
+		0949B2B224544ED400C67643 /* CrudeSuite */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "CrudeRendering" */;
+			buildConfigurationList = 0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "CrudeSuite" */;
 			buildPhases = (
 				0949B2AF24544ED400C67643 /* Sources */,
 				0949B2B024544ED400C67643 /* Frameworks */,
@@ -268,9 +268,9 @@
 			);
 			dependencies = (
 			);
-			name = CrudeRendering;
+			name = CrudeSuite;
 			productName = CrudeEngine;
-			productReference = 0949B2B324544ED400C67643 /* CrudeRendering */;
+			productReference = 0949B2B324544ED400C67643 /* CrudeSuite */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -287,7 +287,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0949B2AE24544ED400C67643 /* Build configuration list for PBXProject "CrudeRendering" */;
+			buildConfigurationList = 0949B2AE24544ED400C67643 /* Build configuration list for PBXProject "CrudeSuite" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -299,7 +299,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0949B2B224544ED400C67643 /* CrudeRendering */,
+				0949B2B224544ED400C67643 /* CrudeSuite */,
 			);
 		};
 /* End PBXProject section */
@@ -475,7 +475,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0949B2AE24544ED400C67643 /* Build configuration list for PBXProject "CrudeRendering" */ = {
+		0949B2AE24544ED400C67643 /* Build configuration list for PBXProject "CrudeSuite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0949B2B824544ED400C67643 /* Debug */,
@@ -484,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "CrudeRendering" */ = {
+		0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "CrudeSuite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0949B2BB24544ED400C67643 /* Debug */,

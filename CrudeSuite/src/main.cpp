@@ -32,7 +32,7 @@ using namespace gl;
 #endif*/
 
 // Include glfw3.h after our OpenGL definitions
-#include "Crude_Suite.h"
+#include "CrudeSuite.h"
 
 using namespace Crude;
 

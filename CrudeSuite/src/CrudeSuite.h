@@ -6,11 +6,11 @@
 //  Copyright © 2020 Hervé Schmit-Veiler. All rights reserved.
 //
 
-#ifndef Crude_Suite_h
-#define Crude_Suite_h
+#ifndef CrudeSuite_h
+#define CrudeSuite_h
 
 //This will be including all the Crude modules
 
-#include "rendering/Crude_Rendering.h"
+#include "rendering/CrudeRendering.h"
 
 #endif /* Crude_Suite_h */

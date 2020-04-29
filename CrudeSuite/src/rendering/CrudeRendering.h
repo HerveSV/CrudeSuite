@@ -6,8 +6,8 @@
 //  Copyright © 2020 Hervé Schmit-Veiler. All rights reserved.
 //
 
-#ifndef Crude_Rendering_h
-#define Crude_Rendering_h
+#ifndef CrudeRendering_h
+#define CrudeRendering_h
 
 #include "Renderer.hpp"
 #include <GLFW/glfw3.h>
