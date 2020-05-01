@@ -10,6 +10,10 @@
 
 #include <GLFW/glfw3.h>
 
+/**
+ Crude::
+ **/
+
 
 bool Crude::windowShouldClose(Window *window)
 {
@@ -21,26 +25,20 @@ void Crude::closeWindow(Window *window)
     return glfwSetWindowShouldClose(window, true);
 }
 
+void Crude::destroyWindow(Window *window)
+{
+    glfwDestroyWindow(window);
+}
+
 unsigned int Crude::getKey(Window *window, unsigned int key)
 {
     return glfwGetKey(window, key);
 }
 
-
-Crude::Renderer::Renderer()
-{
-    
-}
-
-Crude::Renderer::~Renderer()
-{
-    glfwTerminate();
-}
-
-void Crude::Renderer::initOpenGL(unsigned int CONTEXT_VERSION_MAJOR = 3,
-                          unsigned int CONTEXT_VERSION_MINOR = 3,
-                          unsigned int OPENGL_PROFILE = GLFW_OPENGL_CORE_PROFILE,
-                          unsigned int FORWARD_COMPAT = GL_TRUE)
+void Crude::initOpenGL(unsigned int CONTEXT_VERSION_MAJOR = 3,
+                                 unsigned int CONTEXT_VERSION_MINOR = 3,
+                                 unsigned int OPENGL_PROFILE = GLFW_OPENGL_CORE_PROFILE,
+                                 unsigned int FORWARD_COMPAT = GL_TRUE)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, CONTEXT_VERSION_MAJOR);
@@ -49,131 +47,13 @@ void Crude::Renderer::initOpenGL(unsigned int CONTEXT_VERSION_MAJOR = 3,
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, FORWARD_COMPAT);
 }
 
-Crude::Window* Crude::Renderer::createWindow(int width, int height,
-                            std::string name)
+void Crude::terminateOpenGL()
 {
-    assert((width >= 0 || height >= 0) && "You can't have negative window width or length!");
-    
-    m_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
-    m_windowWidth = width;
-    m_windowHeight = height;
-    
-    if(m_window == NULL)
-    {
-        std::cout << "Failed to create GLFW window with name: " << name << std::endl;
-        glfwTerminate();
-        return nullptr;
-    }
-    glfwMakeContextCurrent(m_window);
-    return m_window;
-    
+    glfwTerminate();
 }
 
-bool Crude::Renderer::checkWindow()
-{
-    if(m_window == NULL)
-    {
-        std::cout<<"Window currently inactive!"<<std::endl;
-        return false;
-    }
-    return true;
-}
 
-void Crude::Renderer::enableDepthTest() const
-{
-    glEnable(GL_DEPTH_TEST);
-}
-
-void Crude::Renderer::clearDeptBuffer() const
-{
-    glClear(GL_DEPTH_BUFFER_BIT);
-}
-
-void Crude::Renderer::pollEvents() const
-{
-    glfwPollEvents();
-}
-
-void Crude::Renderer::swapBuffers() const
-{
-    glfwSwapBuffers(m_window);
-}
-
-void Crude::Renderer::draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader) const
-{
-    shader.bind();
-    vao.bind();
-    ebo.bind();
-    glDrawElements(GL_TRIANGLES, ebo.getCount(), GL_UNSIGNED_INT, 0);
-}
-
-void Crude::Renderer::draw(VertexArray &vao, unsigned int verticesCount, Shader &shader) const
-{
-    shader.bind();
-    vao.bind();
-    glDrawArrays(GL_TRIANGLES, 0, verticesCount);
-}
-
-void Crude::Renderer::draw(const unsigned int &vao, unsigned int verticesCount, Shader &shader) const
-{
-    shader.bind();
-    glBindVertexArray(vao);
-    glDrawArrays(GL_TRIANGLES, 0, verticesCount);
-}
-
-void Crude::Renderer::setClearColour(float r, float g, float b, float a)
-{
-    m_windowClearColour = glm::vec4(r, g, b, a);
-    glClearColor(r, g, b, a);
-}
-
-void Crude::Renderer::clearColourBuffer() const
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void Crude::Renderer::enableVsync(bool enable)
-{
-    glfwSwapInterval(enable);
-}
-
-void Crude::Renderer::enablePolygonMode(bool enable)
-{
-    if(enable)
-    {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    }
-    else
-    {
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    }
-}
-
-void Crude::Renderer::setWindow(Crude::Window* window)
-{
-    if(window == nullptr)
-    {
-        std::cout << "Warning: This window does not exist!" <<std::endl;
-    }
-    if(m_window != nullptr)
-    {
-        std::cout << "Window currently in existance will be overrided!" <<std::endl;
-    }
-    glfwMakeContextCurrent(window);
-    m_window = window;
-}
-
-bool Crude::Renderer::windowShouldClose() const
-{
-    return glfwWindowShouldClose(m_window);
-}
-
-Crude::Window* Crude::Renderer::getWindow()
-{
-    return m_window;
-}
-
-bool Crude::Renderer::initGlLoader()
+bool Crude::initGLLoader()
 {
     bool err;
     // Initialize OpenGL loader
@@ -194,9 +74,173 @@ bool Crude::Renderer::initGlLoader()
 #endif
     
     assert(!err && "Fatal Error: Failed to initialise OpenGL loader!");
-
+    
     return err;
 }
+
+
+
+/**
+ Crude::Renderer::
+ **/
+
+
+/*Crude::Renderer::Renderer()
+{
+    
+}
+
+Crude::Renderer::~Renderer()
+{
+    glfwTerminate();
+}*/
+
+
+
+Crude::Window* Crude::Renderer::createWindow(int width, int height,
+                                             std::string name)
+{
+    assert((width >= 0 || height >= 0) && "You can't have negative window width or length!");
+    
+    m_window = glfwCreateWindow(width, height, name.c_str(), NULL, NULL);
+    m_windowWidth = width;
+    m_windowHeight = height;
+    
+    if(m_window == NULL)
+    {
+        std::cout << "Failed to create GLFW window with name: " << name << std::endl;
+        glfwTerminate();
+        return nullptr;
+    }
+    glfwMakeContextCurrent(m_window);
+    return m_window;
+    
+}
+
+void Crude::Renderer::destroyWindow()
+{
+    Crude::destroyWindow(m_window);
+}
+
+void Crude::Renderer::setWindow(Crude::Window* window)
+{
+    if(window == nullptr)
+    {
+        std::cout << "Warning: This window does not exist!" <<std::endl;
+    }
+    if(m_window != nullptr)
+    {
+        std::cout << "Window currently in existance will be overrided!" <<std::endl;
+    }
+    glfwMakeContextCurrent(window);
+    m_window = window;
+}
+
+Crude::Window* Crude::Renderer::getWindow()
+{
+    return m_window;
+}
+
+bool Crude::Renderer::windowShouldClose()
+{
+    return glfwWindowShouldClose(m_window);
+}
+
+bool Crude::Renderer::checkWindow()
+{
+    if(m_window == NULL)
+    {
+        std::cout<<"Window currently inactive!"<<std::endl;
+        return false;
+    }
+    return true;
+}
+
+void Crude::Renderer::enableVsync(bool enable)
+{
+    glfwSwapInterval(enable);
+}
+
+void Crude::Renderer::enablePolygonMode(bool enable)
+{
+    if(enable)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    else
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+}
+
+void Crude::Renderer::setClearColour(float r, float g, float b, float a)
+{
+    m_windowClearColour = glm::vec4(r, g, b, a);
+    glClearColor(r, g, b, a);
+}
+
+void Crude::Renderer::clearColourBuffer()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+
+void Crude::Renderer::enableDepthTest()
+{
+    glEnable(GL_DEPTH_TEST);
+}
+
+void Crude::Renderer::clearDeptBuffer()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+}
+
+void Crude::Renderer::endFrame()
+{
+    swapBuffers();
+    pollEvents();
+}
+
+void Crude::Renderer::pollEvents()
+{
+    glfwPollEvents();
+}
+
+void Crude::Renderer::swapBuffers()
+{
+    glfwSwapBuffers(m_window);
+}
+
+void Crude::Renderer::draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader)
+{
+    shader.bind();
+    vao.bind();
+    ebo.bind();
+    glDrawElements(GL_TRIANGLES, ebo.getCount(), GL_UNSIGNED_INT, 0);
+}
+
+void Crude::Renderer::draw(VertexArray &vao, unsigned int verticesCount, Shader &shader)
+{
+    shader.bind();
+    vao.bind();
+    glDrawArrays(GL_TRIANGLES, 0, verticesCount);
+}
+
+void Crude::Renderer::draw(const unsigned int &vao, unsigned int verticesCount, Shader &shader)
+{
+    shader.bind();
+    glBindVertexArray(vao);
+    glDrawArrays(GL_TRIANGLES, 0, verticesCount);
+}
+
+
+
+
+
+
+/**
+ ImGui::
+ **/
 
 
 
@@ -239,4 +283,11 @@ void ImGui::CrudeRenderFrame()
 {
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+void ImGui::CrudeTerminate()
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 }

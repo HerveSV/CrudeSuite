@@ -68,60 +68,73 @@ namespace Crude
     
     bool windowShouldClose(Window* window);
     
-    void closeWindow(Window* window);
+    void closeWindow(Window* window); //not to be confused with destroyWindow(Window*);
+    
+    void destroyWindow(Window* window);
     
     unsigned int getKey(Window* window, unsigned int key);
+    
+    void initOpenGL(unsigned int CONTEXT_VERSION_MAJOR,
+                    unsigned int CONTEXT_VERSION_MINOR,
+                    unsigned int OPENGL_PROFILE,
+                    unsigned int FORWARD_COMPAT);
+    
+    void terminateOpenGL();
+    
+    bool initGLLoader();
+    
+    
     
     class Renderer
     {
     private:
         //const std::string glsl_version = "#version 330";
-        Window* m_window;
-        unsigned int m_windowWidth;
-        unsigned int m_windowHeight;
-        glm::vec4 m_windowClearColour;
+        inline static Window* m_window;
         
-        bool checkWindow();
+        inline static unsigned int m_windowWidth;
+        
+        inline static unsigned int m_windowHeight;
+        
+        inline static glm::vec4 m_windowClearColour;
+        
+        
     public:
-        Renderer();
-        ~Renderer();
         
-        void initOpenGL(unsigned int CONTEXT_VERSION_MAJOR,
-                        unsigned int CONTEXT_VERSION_MINOR,
-                        unsigned int OPENGL_PROFILE,
-                        unsigned int FORWARD_COMPAT);
+        static Window* createWindow(int width, int height, std::string name = "cookie&dummy");
         
-        bool initGlLoader();
+        static void destroyWindow();
         
-        Window* createWindow(int width, int height, std::string name = "cookie&dummy");
+        static void setWindow(Window* window);
         
-        void setWindow(Window* window);
+        static Window* getWindow();
         
-        Window* getWindow();
+        static bool windowShouldClose();
         
-        bool windowShouldClose() const;
+        static bool checkWindow();
+
+        static void enableVsync(bool enable);
         
-        void enableVsync(bool enable);
+        static void enablePolygonMode(bool enable);
         
-        void enablePolygonMode(bool enable);
+        static void setClearColour(float r, float g, float b, float a);
         
-        void setClearColour(float r, float g, float b, float a);
+        static void clearColourBuffer();
         
-        void clearColourBuffer() const;
+        static void enableDepthTest();
         
-        void enableDepthTest() const;
+        static void clearDeptBuffer();
         
-        void clearDeptBuffer() const;
+        static void pollEvents();
         
-        void pollEvents() const;
+        static void swapBuffers();
         
-        void swapBuffers() const;
+        static void endFrame();
         
-        void draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader) const;
+        static void draw(VertexArray &vao, IndexBuffer &ebo, Shader &shader);
         
-        void draw(VertexArray &vao, unsigned int verticesCount, Shader &shader) const;
+        static void draw(VertexArray &vao, unsigned int verticesCount, Shader &shader);
         
-        void draw(const unsigned int &vao, unsigned int verticesCount, Shader &shader) const;
+        static void draw(const unsigned int &vao, unsigned int verticesCount, Shader &shader);
         
         
     };
@@ -135,6 +148,8 @@ namespace ImGui
     void CrudeNewFrame();
     
     void CrudeRenderFrame();
+    
+    void CrudeTerminate();
 }
 
 #endif /* Renderer_hpp */

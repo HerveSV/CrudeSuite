@@ -8,7 +8,7 @@
 
 #include "Camera.hpp"
 
-Crude::Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_fov(ZOOM)
+Crude::Camera::Camera(Camera_type type, glm::vec3 position, glm::vec3 up, float yaw, float pitch) : m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_fov(ZOOM), m_type(type)
 {
     m_position = position;
     m_worldUp = up;
@@ -17,7 +17,7 @@ Crude::Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) 
     updateCameraVectors();
 }
 // Constructor with scalar values
-Crude::Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_fov(ZOOM)
+Crude::Camera::Camera(Camera_type type, float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : m_front(glm::vec3(0.0f, 0.0f, -1.0f)), m_movementSpeed(SPEED), m_mouseSensitivity(SENSITIVITY), m_fov(ZOOM), m_type(type)
 {
     m_position = glm::vec3(posX, posY, posZ);
     m_worldUp = glm::vec3(upX, upY, upZ);

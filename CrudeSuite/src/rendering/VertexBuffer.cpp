@@ -7,8 +7,9 @@
 //
 
 #include "VertexBuffer.hpp"
-#include <GL/glew.h> 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
 
 Crude::VertexBuffer::VertexBuffer(const void* data, unsigned int size) //size is bytecount of data
 {

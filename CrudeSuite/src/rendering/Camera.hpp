@@ -25,6 +25,11 @@ namespace Crude
         LEFT,
         RIGHT
     };
+    
+    enum class Camera_type {
+        PERSPECTIVE,
+        ORTHO,
+    };
 
     // Default camera values
     const float YAW         = -90.0f;
@@ -37,6 +42,8 @@ namespace Crude
     // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
     class Camera
     {
+    private:
+        Camera_type m_type;
     public:
         // Camera Attributes
         glm::vec3 m_position;
@@ -53,13 +60,15 @@ namespace Crude
         float m_fov;
         
         // Constructor with vectors
-        Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
+        Camera(Camera_type type, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH);
         
         // Constructor with scalar values
-        Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
+        Camera(Camera_type type, float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
         
         // Returns the view matrix calculated using Euler Angles and the LookAt Matrix
         glm::mat4 getViewMatrix();
+        
+        glm::mat4 getProjectionMatrix();
         
         // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
         void processKeyboard(Camera_Movement direction, float deltaTime);

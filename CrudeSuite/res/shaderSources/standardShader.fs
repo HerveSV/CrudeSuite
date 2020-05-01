@@ -14,5 +14,12 @@ uniform float uVisibility3 = 0.0f;
 
 void main() {
 
-    FragColour = mix(mix(mix(vec4(vColour, 1.0f), texture(uTexture1, vTexCoord), uVisibility1), texture(uTexture2, vTexCoord), uVisibility2), texture(uTexture3, vTexCoord), uVisibility3);
+    vec4 tex1 = texture(uTexture1, vTexCoord);
+    vec4 tex2 = texture(uTexture2, vTexCoord);
+    vec4 tex3 = texture(uTexture3, vTexCoord);
+    
+    FragColour = tex2;
+    //mix(mix(mix(vec4(vColour, 1.0f), texture(uTexture1, vTexCoord), uVisibility1), texture(uTexture2, vTexCoord), uVisibility2), texture(uTexture3, vTexCoord), uVisibility3);
+    
+    
 }

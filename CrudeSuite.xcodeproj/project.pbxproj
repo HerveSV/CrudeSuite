@@ -20,7 +20,6 @@
 		09242F182456977700091D9E /* VertexBufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F162456977700091D9E /* VertexBufferLayout.cpp */; };
 		093B5D732456C81A00C802BC /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 093B5D712456C81A00C802BC /* Renderer.cpp */; };
 		0949B2B724544ED400C67643 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0949B2B624544ED400C67643 /* main.cpp */; };
-		09B23CC72458819200773A9C /* preImGui.txt in Sources */ = {isa = PBXBuildFile; fileRef = 09B23CC62458819200773A9C /* preImGui.txt */; };
 		09B23D2224592E2100773A9C /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09B23D2124592E2100773A9C /* libGLEW.2.1.0.dylib */; };
 		09B23D4D2459CA5100773A9C /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D4C2459CA5000773A9C /* imgui_impl_opengl3.cpp */; };
 		09B23D502459CA6700773A9C /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D4F2459CA6700773A9C /* imgui_impl_glfw.cpp */; };
@@ -28,6 +27,27 @@
 		09B23D5C2459CA7100773A9C /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D532459CA7000773A9C /* imgui.cpp */; };
 		09B23D5D2459CA7100773A9C /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D552459CA7100773A9C /* imgui_draw.cpp */; };
 		09B23D5E2459CA7100773A9C /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D572459CA7100773A9C /* imgui_widgets.cpp */; };
+		09B23D6F245A54B300773A9C /* CrudeRendering.h in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D492459C3F500773A9C /* CrudeRendering.h */; };
+		09B23D70245A54B300773A9C /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242EFE24557DD500091D9E /* Shader.cpp */; };
+		09B23D71245A54B300773A9C /* Shader.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242EFF24557DD500091D9E /* Shader.hpp */; };
+		09B23D72245A54B300773A9C /* IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F062455811100091D9E /* IndexBuffer.cpp */; };
+		09B23D73245A54B300773A9C /* IndexBuffer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242EFC24557B9D00091D9E /* IndexBuffer.hpp */; };
+		09B23D74245A54B300773A9C /* VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242EF32455729100091D9E /* VertexBuffer.cpp */; };
+		09B23D75245A54B300773A9C /* VertexBuffer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242EF42455729100091D9E /* VertexBuffer.hpp */; };
+		09B23D76245A54B300773A9C /* VertexBufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F162456977700091D9E /* VertexBufferLayout.cpp */; };
+		09B23D77245A54B300773A9C /* VertexBufferLayout.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F172456977700091D9E /* VertexBufferLayout.hpp */; };
+		09B23D78245A54B300773A9C /* VertexArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F132456594C00091D9E /* VertexArray.cpp */; };
+		09B23D79245A54B300773A9C /* VertexArray.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F142456594C00091D9E /* VertexArray.hpp */; };
+		09B23D7A245A54B300773A9C /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F092455822500091D9E /* Camera.cpp */; };
+		09B23D7B245A54B300773A9C /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F082455822500091D9E /* Camera.hpp */; };
+		09B23D7C245A54B300773A9C /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F102455E74A00091D9E /* Texture.cpp */; };
+		09B23D7D245A54B300773A9C /* Texture.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 09242F112455E74A00091D9E /* Texture.hpp */; };
+		09B23D7E245A54B300773A9C /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 093B5D712456C81A00C802BC /* Renderer.cpp */; };
+		09B23D7F245A54B300773A9C /* Renderer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 093B5D722456C81A00C802BC /* Renderer.hpp */; };
+		09B23D80245A54CB00773A9C /* CrudeSuite.h in Sources */ = {isa = PBXBuildFile; fileRef = 09B23D4A2459C54200773A9C /* CrudeSuite.h */; };
+		09B23D85245A55E800773A9C /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09B23D84245A55E700773A9C /* libglfw3.a */; };
+		09B23D87245A55F700773A9C /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09B23D86245A55F700773A9C /* libGLEW.a */; };
+		09B23D88245A560200773A9C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09242EF12455704A00091D9E /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,11 +87,9 @@
 		09242F172456977700091D9E /* VertexBufferLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VertexBufferLayout.hpp; sourceTree = "<group>"; };
 		093B5D712456C81A00C802BC /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		093B5D722456C81A00C802BC /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
-		0949B2B324544ED400C67643 /* CrudeSuite */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CrudeSuite; sourceTree = BUILT_PRODUCTS_DIR; };
+		0949B2B324544ED400C67643 /* Crude */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Crude; sourceTree = BUILT_PRODUCTS_DIR; };
 		0949B2B624544ED400C67643 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		09B23CC62458819200773A9C /* preImGui.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = preImGui.txt; sourceTree = "<group>"; };
 		09B23D2124592E2100773A9C /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
-		09B23D462459491200773A9C /* workingCoop.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = workingCoop.txt; sourceTree = "<group>"; };
 		09B23D492459C3F500773A9C /* CrudeRendering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrudeRendering.h; sourceTree = "<group>"; };
 		09B23D4A2459C54200773A9C /* CrudeSuite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrudeSuite.h; sourceTree = "<group>"; };
 		09B23D4B2459CA5000773A9C /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_opengl3.h; path = "../../../../../../../Downloads/imgui-1.76 2/examples/imgui_impl_opengl3.h"; sourceTree = "<group>"; };
@@ -88,6 +106,10 @@
 		09B23D582459CA7100773A9C /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_internal.h; path = "../../../../../../../Downloads/imgui-1.76 2/imgui_internal.h"; sourceTree = "<group>"; };
 		09B23D592459CA7100773A9C /* imstb_rectpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imstb_rectpack.h; path = "../../../../../../../Downloads/imgui-1.76 2/imstb_rectpack.h"; sourceTree = "<group>"; };
 		09B23D5A2459CA7100773A9C /* imstb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imstb_textedit.h; path = "../../../../../../../Downloads/imgui-1.76 2/imstb_textedit.h"; sourceTree = "<group>"; };
+		09B23D6B245A549800773A9C /* libCrudeSuite.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCrudeSuite.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		09B23D84245A55E700773A9C /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../../../usr/local/Cellar/glfw/3.3/lib/libglfw3.a; sourceTree = "<group>"; };
+		09B23D86245A55F700773A9C /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.a; sourceTree = "<group>"; };
+		09B23D89245A983400773A9C /* CrudeLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CrudeLogo.png; sourceTree = "<group>"; };
 		09F3FB6E2457F67200B1FB61 /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,12 +124,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		09B23D69245A549800773A9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09B23D88245A560200773A9C /* OpenGL.framework in Frameworks */,
+				09B23D87245A55F700773A9C /* libGLEW.a in Frameworks */,
+				09B23D85245A55E800773A9C /* libglfw3.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		09242EEE2455704400091D9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09B23D86245A55F700773A9C /* libGLEW.a */,
+				09B23D84245A55E700773A9C /* libglfw3.a */,
 				09B23D2124592E2100773A9C /* libGLEW.2.1.0.dylib */,
 				09242EF12455704A00091D9E /* OpenGL.framework */,
 				09242EEF2455704400091D9E /* libglfw.3.3.dylib */,
@@ -178,7 +212,8 @@
 		0949B2B424544ED400C67643 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0949B2B324544ED400C67643 /* CrudeSuite */,
+				0949B2B324544ED400C67643 /* Crude */,
+				09B23D6B245A549800773A9C /* libCrudeSuite.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +262,7 @@
 			children = (
 				09F3FB6E2457F67200B1FB61 /* awesomeface.png */,
 				09242F0D2455896300091D9E /* container.jpg */,
+				09B23D89245A983400773A9C /* CrudeLogo.png */,
 			);
 			path = textures;
 			sourceTree = "<group>";
@@ -247,18 +283,26 @@
 				09242F0E2455E72000091D9E /* rendering */,
 				09B23D4A2459C54200773A9C /* CrudeSuite.h */,
 				0949B2B624544ED400C67643 /* main.cpp */,
-				09B23CC62458819200773A9C /* preImGui.txt */,
-				09B23D462459491200773A9C /* workingCoop.txt */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		09B23D67245A549800773A9C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		0949B2B224544ED400C67643 /* CrudeSuite */ = {
+		0949B2B224544ED400C67643 /* Crude */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "CrudeSuite" */;
+			buildConfigurationList = 0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "Crude" */;
 			buildPhases = (
 				0949B2AF24544ED400C67643 /* Sources */,
 				0949B2B024544ED400C67643 /* Frameworks */,
@@ -268,10 +312,27 @@
 			);
 			dependencies = (
 			);
-			name = CrudeSuite;
+			name = Crude;
 			productName = CrudeEngine;
-			productReference = 0949B2B324544ED400C67643 /* CrudeSuite */;
+			productReference = 0949B2B324544ED400C67643 /* Crude */;
 			productType = "com.apple.product-type.tool";
+		};
+		09B23D6A245A549800773A9C /* CrudeSuite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09B23D6C245A549800773A9C /* Build configuration list for PBXNativeTarget "CrudeSuite" */;
+			buildPhases = (
+				09B23D67245A549800773A9C /* Headers */,
+				09B23D68245A549800773A9C /* Sources */,
+				09B23D69245A549800773A9C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CrudeSuite;
+			productName = CrudeSuite;
+			productReference = 09B23D6B245A549800773A9C /* libCrudeSuite.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
 
@@ -283,6 +344,9 @@
 				ORGANIZATIONNAME = "Hervé Schmit-Veiler";
 				TargetAttributes = {
 					0949B2B224544ED400C67643 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					09B23D6A245A549800773A9C = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -299,7 +363,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0949B2B224544ED400C67643 /* CrudeSuite */,
+				0949B2B224544ED400C67643 /* Crude */,
+				09B23D6A245A549800773A9C /* CrudeSuite */,
 			);
 		};
 /* End PBXProject section */
@@ -310,7 +375,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0949B2B724544ED400C67643 /* main.cpp in Sources */,
-				09B23CC72458819200773A9C /* preImGui.txt in Sources */,
 				09B23D502459CA6700773A9C /* imgui_impl_glfw.cpp in Sources */,
 				09242EF52455729100091D9E /* VertexBuffer.cpp in Sources */,
 				09B23D5D2459CA7100773A9C /* imgui_draw.cpp in Sources */,
@@ -327,6 +391,31 @@
 				09B23D4D2459CA5100773A9C /* imgui_impl_opengl3.cpp in Sources */,
 				09242F152456594C00091D9E /* VertexArray.cpp in Sources */,
 				09242F0024557DD500091D9E /* Shader.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		09B23D68245A549800773A9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09B23D80245A54CB00773A9C /* CrudeSuite.h in Sources */,
+				09B23D6F245A54B300773A9C /* CrudeRendering.h in Sources */,
+				09B23D70245A54B300773A9C /* Shader.cpp in Sources */,
+				09B23D71245A54B300773A9C /* Shader.hpp in Sources */,
+				09B23D72245A54B300773A9C /* IndexBuffer.cpp in Sources */,
+				09B23D73245A54B300773A9C /* IndexBuffer.hpp in Sources */,
+				09B23D74245A54B300773A9C /* VertexBuffer.cpp in Sources */,
+				09B23D75245A54B300773A9C /* VertexBuffer.hpp in Sources */,
+				09B23D76245A54B300773A9C /* VertexBufferLayout.cpp in Sources */,
+				09B23D77245A54B300773A9C /* VertexBufferLayout.hpp in Sources */,
+				09B23D78245A54B300773A9C /* VertexArray.cpp in Sources */,
+				09B23D79245A54B300773A9C /* VertexArray.hpp in Sources */,
+				09B23D7A245A54B300773A9C /* Camera.cpp in Sources */,
+				09B23D7B245A54B300773A9C /* Camera.hpp in Sources */,
+				09B23D7C245A54B300773A9C /* Texture.cpp in Sources */,
+				09B23D7D245A54B300773A9C /* Texture.hpp in Sources */,
+				09B23D7E245A54B300773A9C /* Renderer.cpp in Sources */,
+				09B23D7F245A54B300773A9C /* Renderer.hpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +561,40 @@
 			};
 			name = Release;
 		};
+		09B23D6D245A549800773A9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.1.0/lib,
+					/usr/local/Cellar/glfw/3.3/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		09B23D6E245A549800773A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.1.0/lib,
+					/usr/local/Cellar/glfw/3.3/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -484,11 +607,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "CrudeSuite" */ = {
+		0949B2BA24544ED400C67643 /* Build configuration list for PBXNativeTarget "Crude" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0949B2BB24544ED400C67643 /* Debug */,
 				0949B2BC24544ED400C67643 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		09B23D6C245A549800773A9C /* Build configuration list for PBXNativeTarget "CrudeSuite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09B23D6D245A549800773A9C /* Debug */,
+				09B23D6E245A549800773A9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
