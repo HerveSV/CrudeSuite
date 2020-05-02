@@ -201,13 +201,19 @@ int main()
     Texture texture3("res/textures/CrudeLogoBackground.png", GL_RGBA, true);
     
     
-    Crude::Camera cam(Camera_type::PERSPECTIVE, glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
+    Crude::Camera cam(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    cam.setProjectionInfo(CameraType::PERSPECTIVE, windowWidth, windowHeight, 0.1f, 100.0f);
+    cam.setFov(glm::radians(45.0f));
+    
+    glm::mat4 model(1.0f);
     glm::mat4 view(1.0f);
     glm::mat4 projection(1.0f);
     
     view = cam.getViewMatrix();
-    projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
+    
+    //glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
+    //
+    //
     
     shaderProgram.bind();
 
@@ -230,6 +236,7 @@ int main()
     float Vis1 = 1.0f;
     float Vis2 = 0.0f;
     float Vis3 = 0.0f;
+    float fov = 45.0f;
     Renderer::enableDepthTest();
     while(!Renderer::windowShouldClose())
     {
@@ -245,10 +252,14 @@ int main()
         ImGui::SliderFloat("Vis1", &Vis1, 0.0f, 1.0f);
         ImGui::SliderFloat("Vis2", &Vis2, 0.0f, 1.0f);
         ImGui::SliderFloat("Vis3", &Vis3, 0.0f, 1.0f);
+        ImGui::Spacing();
+        ImGui::SliderFloat("FOV", &fov, 0.1f, 180.0f);
         ImGui::End();
         
+        cam.setFov(glm::radians(fov));
+        projection = cam.getProjectionMatrix();
         
-        glm::mat4 model(1.0f);
+        model = glm::mat4(1.0f);
         model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
         model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
