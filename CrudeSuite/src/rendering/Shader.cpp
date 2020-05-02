@@ -99,39 +99,104 @@ int Crude::Shader::getUniformLocation(const std::string &name)
     return location;
 }
 
-void Crude::Shader::setBool(const std::string &name, bool value)
+void Crude::Shader::setBool(const std::string &name, bool value, bool bindOrNot)
 {
-    glUniform1i(getUniformLocation(name), (int)value);
+    if(bindOrNot)
+    {
+        bind();
+        glUniform1i(getUniformLocation(name), (int)value);
+        unbind();
+    }
+    else
+    {
+        glUniform1i(getUniformLocation(name), (int)value);
+    }
+    
 }
 
-void Crude::Shader::setInt(const std::string &name, int value)
+void Crude::Shader::setInt(const std::string &name, int value, bool bindOrNot)
 {
-    glUniform1i(getUniformLocation(name), value);
+    if(bindOrNot)
+    {
+        bind();
+        glUniform1i(getUniformLocation(name), value);
+        unbind();
+    }
+    else
+    {
+        glUniform1i(getUniformLocation(name), value);
+    }
 }
 
-void Crude::Shader::setFloat(const std::string &name, float value)
+void Crude::Shader::setFloat(const std::string &name, float value, bool bindOrNot)
 {
-    glUniform1f(getUniformLocation(name), value);
+    if(bindOrNot)
+    {
+        bind();
+        glUniform1f(getUniformLocation(name), value);
+        unbind();
+    }
+    else
+    {
+        glUniform1f(getUniformLocation(name), value);
+    }
+   
 }
 
-void Crude::Shader::setVec2f(const std::string &name, float x, float y)
+void Crude::Shader::setVec2f(const std::string &name, float x, float y, bool bindOrNot)
 {
-    glUniform2f(getUniformLocation(name), x, y);
+    if(bindOrNot)
+    {
+        bind();
+        glUniform2f(getUniformLocation(name), x, y);
+        unbind();
+    }
+    else
+    {
+        glUniform2f(getUniformLocation(name), x, y);
+    }
 }
 
-void Crude::Shader::setVec3f(const std::string &name, float x, float y, float z)
+void Crude::Shader::setVec3f(const std::string &name, float x, float y, float z, bool bindOrNot)
 {
-    glUniform3f(getUniformLocation(name), x, y, z);
+    if(bindOrNot)
+    {
+        bind();
+        glUniform3f(getUniformLocation(name), x, y, z);
+        unbind();
+    }
+    else
+    {
+        glUniform3f(getUniformLocation(name), x, y, z);
+    }
 }
 
-void Crude::Shader::setVec4f(const std::string &name, float x, float y, float z, float w)
+void Crude::Shader::setVec4f(const std::string &name, float x, float y, float z, float w, bool bindOrNot)
 {
-    glUniform4f(getUniformLocation(name), x, y, z, w);
+    if(bindOrNot)
+    {
+        bind();
+        glUniform4f(getUniformLocation(name), x, y, z, w);
+        unbind();
+    }
+    else
+    {
+        glUniform4f(getUniformLocation(name), x, y, z, w);
+    }
 }
 
-void Crude::Shader::setMat4(const std::string &name, const glm::mat4 &mat)
+void Crude::Shader::setMat4(const std::string &name, const glm::mat4 &mat, bool bindOrNot)
 {
-    glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat));
+    if(bindOrNot)
+    {
+        bind();
+        glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat));
+        unbind();
+    }
+    else
+    {
+        glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat));
+    }
 }
 
 void Crude::Shader::checkCompileErrors(unsigned int shader, std::string type)

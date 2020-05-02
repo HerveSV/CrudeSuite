@@ -67,9 +67,10 @@ int main()
     ImGui::CrudeInit(window, true);
     
     Crude::Shader shaderProgram("res/shaderSources/standardShader.vs", "res/shaderSources/standardShader.fs");
-    shaderProgram.setInt("uTexture1", 0);
-    shaderProgram.setInt("uTexture2", 1);
-    shaderProgram.setInt("uTexture3", 2);
+    
+    shaderProgram.setInt("uTexture1", 0, true);
+    shaderProgram.setInt("uTexture2", 1, true);
+    shaderProgram.setInt("uTexture3", 2, true);
     
     float vertices3[]
     {
@@ -195,9 +196,9 @@ int main()
     vao3.addVertexBuffer(vbo3, layout3);
     vao3.addIndexBuffer(ebo3);
     
-    Crude::Texture texture1("res/textures/container.jpg", GL_RGB, true);
-    Crude::Texture texture2("res/textures/awesomeface.png", GL_RGBA, true);
-    Texture logoTexture("res/textures/CrudeLogoBackground.png", GL_RGBA, true);
+    Texture texture1("res/textures/container.jpg", GL_RGB, true);
+    Texture texture2("res/textures/awesomeface.png", GL_RGBA, true);
+    Texture texture3("res/textures/CrudeLogoBackground.png", GL_RGBA, true);
     
     
     Crude::Camera cam(Camera_type::PERSPECTIVE, glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -207,37 +208,31 @@ int main()
     
     view = cam.getViewMatrix();
     projection = glm::perspective(glm::radians(45.0f), (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
-
+    
     shaderProgram.bind();
 
     shaderProgram.setFloat("uVisibility1", 1.0f);
-    shaderProgram.setFloat("uVisibility3", 0.0f); //get multiple textures working
+    shaderProgram.setFloat("uVisibility3", 0.8f); //get multiple textures working
     shaderProgram.setFloat("uVisibility2", 0.0f);
+    
     texture1.bind(0);
-    logoTexture.bind(1);
-    texture2.bind(2);
+    texture2.bind(1);
+    texture3.bind(2);
+    
+    
+    //shaderProgram.setFloat("uVisibility1", 1.0f);
+    //shaderProgram.setFloat("uVisibility3", 0.0f); //get multiple textures working
+    //shaderProgram.setFloat("uVisibility2", 0.0f);
+    
     
     glm::vec3 rotation(45.0f, 45.0f, 45.0f);
     glm::vec4 clearColour = glm::vec4(0.2f, 0.3f, 0.3f, 1.0f);
+    float Vis1 = 1.0f;
+    float Vis2 = 0.0f;
+    float Vis3 = 0.0f;
     Renderer::enableDepthTest();
     while(!Renderer::windowShouldClose())
     {
-        glm::mat4 model(1.0f);
-        model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-        model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-         model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-        Renderer::setClearColour(clearColour.r, clearColour.g, clearColour.b, clearColour.a);
-        processInput(window);
-        Renderer::clearColourBuffer();
-        Renderer::clearDeptBuffer();
-
-        Renderer::enablePolygonMode(false);
-        shaderProgram.bind();
-
-        shaderProgram.setMat4("uMVP", projection*view*model);
-
-        Renderer::draw(vao2, 36, shaderProgram);
-        
         ImGui::CrudeNewFrame();
         
         ImGui::ShowDemoWindow();
@@ -246,10 +241,33 @@ int main()
         ImGui::SliderFloat("X Rotation", &rotation.x, 0, 360);
         ImGui::SliderFloat("Y Rotation", &rotation.y, 0, 360);
         ImGui::SliderFloat("Z Rotation", &rotation.z, 0, 360);
+        ImGui::Spacing();
+        ImGui::SliderFloat("Vis1", &Vis1, 0.0f, 1.0f);
+        ImGui::SliderFloat("Vis2", &Vis2, 0.0f, 1.0f);
+        ImGui::SliderFloat("Vis3", &Vis3, 0.0f, 1.0f);
         ImGui::End();
         
-        ImGui::CrudeRenderFrame();
         
+        glm::mat4 model(1.0f);
+        model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+        Renderer::setClearColour(clearColour.r, clearColour.g, clearColour.b, clearColour.a);
+        processInput(window);
+        Renderer::clearColourBuffer();
+        Renderer::clearDeptBuffer();
+        
+        Renderer::enablePolygonMode(false);
+        shaderProgram.bind();
+        
+        shaderProgram.setMat4("uMVP", projection*view*model);
+        shaderProgram.setFloat("uVisibility1", Vis1);
+        shaderProgram.setFloat("uVisibility2", Vis2); //get multiple textures working
+        shaderProgram.setFloat("uVisibility3", Vis3);
+        
+        Renderer::draw(vao2, 36, shaderProgram);
+        
+        ImGui::CrudeRenderFrame();
         Renderer::endFrame();
     }
     

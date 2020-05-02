@@ -51,8 +51,8 @@ void Crude::Texture::bind(unsigned int slot)
     assert(slot <= GL_MAX_TEXTURE_UNITS && "slot exceed maximum texture units available!");
     m_slot = slot;
     
-    glBindTexture(GL_TEXTURE_2D, m_ID);
     glActiveTexture(GL_TEXTURE0 + m_slot);
+    glBindTexture(GL_TEXTURE_2D, m_ID);
 }
 
 void Crude::Texture::unbind()

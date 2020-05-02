@@ -48,19 +48,19 @@ namespace Crude
         // ------------------------------------------------------------------------
         int getUniformLocation(const std::string &name);
         
-        void setBool(const std::string &name, bool value);
+        void setBool(const std::string &name, bool value, bool bindOrNot = false);
      
-        void setInt(const std::string &name, int value);
+        void setInt(const std::string &name, int value, bool bind = false);
         
-        void setFloat(const std::string &name, float value);
+        void setFloat(const std::string &name, float value, bool bind = false);
         
-        void setVec2f(const std::string &name, float x, float y);
+        void setVec2f(const std::string &name, float x, float y, bool bind = false);
         
-        void setVec3f(const std::string &name, float x, float y, float z);
+        void setVec3f(const std::string &name, float x, float y, float z, bool bind = false);
         
-        void setVec4f(const std::string &name, float x, float y, float z, float w);
+        void setVec4f(const std::string &name, float x, float y, float z, float w, bool bind = false);
         
-        void setMat4(const std::string &name, const glm::mat4 &mat);
+        void setMat4(const std::string &name, const glm::mat4 &mat, bool bind = false);
         
         unsigned int getID() const {return m_ID;}
         
